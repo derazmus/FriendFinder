@@ -1,30 +1,23 @@
 // Dependencies
 // =============================================================
-var express = require("express");
-var bodyParser = require("body-parser");
-var path = require("path");
+var bodyParser = require('body-parser');
+var express = require('express');
+var path =require('path');
 
-// Sets up the Express App
-// =============================================================
 var app = express();
 var PORT = process.env.PORT || 3000;
-
-// body pares middle ware
-//==============================================================
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.text());
-app.use(bodyParser.json({type:'application/vnd.api+json'}));
-
-
-//require routes
-//=============================================================
-require('./app/routing/htmlRoutes.js')(app); 
+ 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+ 
+// parse application/json
+app.use(bodyParser.json())
+ 
+// routes to html pages
 require('./app/routing/apiRoutes.js')(app);
+require('./app/routing/htmlRoutes.js')(app);
 
 
-// Starts the server to begin listening
-// =============================================================
-app.listen(PORT, function() {
-  console.log("App listening on PORT " + PORT);
+app.listen(PORT, function(){
+	console.log("app listening on PORT:" + PORT);
 });
