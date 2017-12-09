@@ -1,7 +1,7 @@
 var friendsArray = [
 	{
-		name: "Ahmend",
-		photo: "https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1db/345aa3.jpg",
+		name: "Harry",
+		photo: "http://images2.fanpop.com/image/photos/11000000/2001-Harry-Potter-and-the-Sorcerer-s-Stone-Promotional-Shoot-HQ-daniel-radcliffe-11097397-1605-1967.jpg",
 		score:[
 		5,
 		1,

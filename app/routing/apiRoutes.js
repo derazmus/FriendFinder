@@ -1,4 +1,4 @@
-var friendsData = require('../data/friends.js');
+var friendsData = require('../data/friends');
 
 module.exports = function(app){
 	app.get('/api/friends', function(req,res){
@@ -6,6 +6,19 @@ module.exports = function(app){
 	})
 
 	app.post('/api/friends', function(req,res){
-		res.json(friendsData);
+
+		var bestMatch = {
+			name: "",	
+			scores: ""
+		};
+
+		var userData = req.body;
+		var userScores = userData.scores;
+
+
+		bestMatch.name = userData.name;
+		bestMatch.scores = userScores;
+
+		res.json(bestMatch);
 	})
 }
