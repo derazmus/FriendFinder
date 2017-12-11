@@ -12,9 +12,9 @@ var friendsArray = [
 		2,
 		5,
 		4,
-		1,
+		1		
 		]
-	}	
-];
+	}
+ ];
 
 module.exports = friendsArray;

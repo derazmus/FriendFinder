@@ -168,35 +168,65 @@
     </footer>
   </div>
 
+<!-- Send data -->
 <script type="text/javascript">
-  $("#submit").on("click", function(event){
-    event.preventDefault();
-
-    var userData = {
-      name: $("#name").val(),
-      scores:[
-      $("#q1").val(),
-      $("#q2").val(),
-      $("#q3").val(),
-      $("#q4").val(),
-      $("#q5").val(),
-      $("#q6").val(),
-      $("#q7").val(),
-      $("#q8").val(),
-      $("#q9").val(),
-      $("#q10").val()
-      ]
-    }
-
-    $.post("/api/friends", userData, function(data){
-      $("#match-name").text(data.name);
-      console.log(data.scores);
-    })
-  })
-
-
+    // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
+    // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
+    // Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
+    // In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file
+    $("#submit").on("click", function(event) {
+      event.preventDefault();
+      // Here we grab the form elements
+      var newFriend = {
+        name: $("#name").val(),
+        photoUrl: $("#photoUrl").val(),
+        scores: [ 
+          $("#q1").val(),
+          $("#q2").val(),
+          $("#q3").val(),
+          $("#q4").val(),
+          $("#q5").val(),
+          $("#q6").val(),
+          $("#q7").val(),
+          $("#q8").val(),
+          $("#q9").val(),
+          $("#q10").val()
+        ]
+      };
+      //console.log(newFriend);
+      // This line is the magic. It"s very similar to the standard ajax function we used.
+      // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
+      // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
+      // depending on if a tables is available or not.
+      $.post("/api/friends", newFriend,
+        function(data) {
+          // If a table is available... tell user they are booked.
+          if (data) {
+            alert("You have been added!");
+          }
+          
+          // Clear the form when submitting
+          $("#name").val("");
+          $("#photoUrl").val("");
+          $("#q1").val("");
+          $("#q2").val("");
+          $("#q3").val("");
+          $("#q4").val("");
+          $("#q5").val("");
+          $("#q6").val("");
+          $("#q7").val("");
+          $("#q8").val("");
+          $("#q9").val("");
+          $("#q10").val("");
+          $('#friendFound').html("Your Friend is found: " + data.name);
+          $('#friendImage').html("<img src=" + data.photoUrl + " width='200px'>")
+          
+          // console.log("--------------------------------")
+          // console.log(data);
+          // console.log(data.name );
+        });
+    });
 </script>
-
   
 </body>
 
