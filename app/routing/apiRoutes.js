@@ -59,17 +59,6 @@ module.exports = function(app){
 
   });
 
-  // ---------------------------------------------------------------------------
-  // Below code is to clear out the table while working with the functionality.
-
-  // app.post("/api/clear", function() {
-  //   // Empty out the arrays of data
-  //   friends = [];
-
-  //   console.log(friends);
-  // });
+  
 };
 
-function mycomparator(a,b) {
-    return parseInt(a.sum, 10) - parseInt(b.sum, 10);
-  }
