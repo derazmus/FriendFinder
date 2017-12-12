@@ -33,7 +33,7 @@ module.exports = function(app){
     // Note the code here. Our "server" will respond to requests and let users know if they successfully posted the survey.
     // console.log("---------------------");
     // console.log(req.body);
-    friends.push(req.body);
+  
 
     var compareArray = [];
 
@@ -41,15 +41,33 @@ module.exports = function(app){
         var totalDif = 0;
         if (friends[i].name != req.body.name ) {
           for (var j = 0; j < 10; j++) {
-            var dif = Math.abs(req.body.scores[j] - friends[i].scores[j]);
+
+
+            //CHANGED VAR SCORES TO SCORE AND USED PARSEINT
+
+            var dif = Math.abs(parseInt(req.body.scores[j]) - parseInt(friends[i].score[j]));
             totalDif+= dif;
           };
+
+
+
+
+
+          //KEY/VALUE IS PHOTO NOT PHOTOURL
+
           compareArray.push({name: friends[i].name,
                               sum: totalDif,
-                         photoUrl: friends[i].photoUrl});
+                         photoUrl: friends[i].photo});
         };
     };
-    compareArray.sort(mycomparator);
+
+    //COMMENTED THIS OUT BECAUSE MYCOMPARATOR DOESN'T EXIST
+    //compareArray.sort(mycomparator);
+
+    //ADDED PUSH HERE SO IT ADDS NEW FRIEND TO FRIENDS LIST AFTER COMPARISON IS MADE
+
+    friends.push(req.body);
+
 
     console.log("Your friend: " + compareArray[0].name );
     var nameObj = {name: compareArray[0].name,
