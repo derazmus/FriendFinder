@@ -21,5 +21,11 @@
     "express": "^4.16.2",
     "path": "^0.12.7"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "scripts": {
+       "start": "node server.js"
+     }
+   }
 }
+
+
